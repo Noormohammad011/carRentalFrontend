@@ -17,7 +17,7 @@ const Home = () => {
     <>
       <div className='container'>
         <div className='row my-5'>
-          <h1 className='text-center text-uppercase'>Car</h1>
+          <h3 className='text-center text-uppercase'>Welcome To Car Rent house</h3>
         </div>
         <div className='row row-cols-1 row-cols-sm-2 row-cols-md-4'>
           {loading ? (

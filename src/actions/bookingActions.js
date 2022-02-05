@@ -12,11 +12,17 @@ import {
 
 export const bookCar = (reqObj) => async (dispatch) => {
   try {
-    dispatch({ type: BOOKING_CREATE_REQUEST })
+      dispatch({ type: BOOKING_CREATE_REQUEST })
+      
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
 
     const { data } = await axios.post(
       `http://localhost:5000/api/bookings/bookcar`,
-      reqObj
+      reqObj, config
     )
 
     dispatch({
@@ -25,7 +31,7 @@ export const bookCar = (reqObj) => async (dispatch) => {
     })
        message.success('Your car booked successfully')
         setTimeout(() => {
-          window.location.href = '/userbookings'
+          window.location.href = '/'
         }, 500)
   } catch (error) {
     dispatch({

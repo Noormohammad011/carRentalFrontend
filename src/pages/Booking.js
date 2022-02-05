@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import StripeCheckout from 'react-stripe-checkout'
 import { useParams } from 'react-router-dom'
 import { listCarDetails } from '../actions/carActions'
 import { useSelector, useDispatch } from 'react-redux'
@@ -6,6 +7,7 @@ import moment from 'moment'
 import { Col, Row, Divider, DatePicker, Checkbox, Modal } from 'antd'
 import { bookCar } from '../actions/bookingActions'
 const { RangePicker } = DatePicker
+
 const Booking = () => {
   const [from, setFrom] = useState()
   const [to, setTo] = useState()
@@ -38,36 +40,23 @@ const Booking = () => {
   }
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
-  function bookNow() {
-    const reqObj = {
-      user: userInfo._id,
-      car: car._id,
-      totalHours,
-      totalAmount,
-      driverRequired: driver,
-      bookedTimeSlots: {
-        from,
-        to,
-      },
-    }
-    dispatch(bookCar(reqObj))
-  }
-  // function onToken(token){
-  //     const reqObj = {
-  //         token,
-  //         user: JSON.parse(localStorage.getItem("user"))._id,
-  //         car: car._id,
-  //         totalHours,
-  //         totalAmount,
-  //         driverRequired: driver,
-  //         bookedTimeSlots: {
-  //           from,
-  //           to,
-  //         },
-  //       };
+ 
+  function onToken(token){
+      const reqObj = {
+        token,
+        user: userInfo._id,
+        car: car._id,
+        totalHours,
+        totalAmount,
+        driverRequired: driver,
+        bookedTimeSlots: {
+          from,
+          to,
+        },
+      }
 
-  //       dispatch(bookCar(reqObj));
-  //   }
+        dispatch(bookCar(reqObj));
+    }
   return (
     <>
       <Row
@@ -133,19 +122,15 @@ const Booking = () => {
                 Driver Required
               </Checkbox>
               <h3>Total Amount : {totalAmount}</h3>
-              {/* <StripeCheckout
+              <StripeCheckout
                 shippingAddress
                 token={onToken}
-                currency='inr'
+                currency='USD'
                 amount={totalAmount * 100}
-                stripeKey='pk_test_51IYnC0SIR2AbPxU0TMStZwFUoaDZle9yXVygpVIzg36LdpO8aSG8B9j2C0AikiQw2YyCI8n4faFYQI5uG3Nk5EGQ00lCfjXYvZ'
+                stripeKey='pk_test_51K8gdwLv5rAyPDp0iOxW19OQrpqZ7yKdG5eKQ5dSdUVLgp8uKZ5dAXDIUqBiaYctTTyfyzNDhCDdWmMy6IIb8SzN00O60I9Vgy'
               >
                 <button className='btn1'>Book Now</button>
-              </StripeCheckout> */}
-              '
-              <button className='btn1' onClick={bookNow}>
-                Book Now
-              </button>
+              </StripeCheckout>
             </div>
           )}
         </Col>
