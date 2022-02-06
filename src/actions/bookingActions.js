@@ -21,7 +21,7 @@ export const bookCar = (reqObj) => async (dispatch) => {
     }
 
     const { data } = await axios.post(
-      `http://localhost:5000/api/bookings/bookcar`,
+      `https://mysterious-thicket-15468.herokuapp.com/api/bookings/bookcar`,
       reqObj,
       config
     )
@@ -60,7 +60,7 @@ export const getAllBookings = () => async (dispatch, getState) => {
     }
 
    const { data } = await axios.get(
-     `http://localhost:5000/api/bookings/bookcar`,
+     `https://mysterious-thicket-15468.herokuapp.com/api/bookings/bookcar`,
      config
    )
 

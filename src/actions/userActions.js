@@ -40,7 +40,7 @@ export const register = (name, email, password) => async (dispatch) => {
     }
 
     const { data } = await axios.post(
-      'http://localhost:5000/api/user/register',
+      'https://mysterious-thicket-15468.herokuapp.com/api/user/register',
       { name, email, password },
       config
     )
@@ -76,7 +76,7 @@ export const login = (email, password) => async (dispatch) => {
     }
 
     const { data } = await axios.post(
-      'http://localhost:5000/api/user/login',
+      'https://mysterious-thicket-15468.herokuapp.com/api/user/login',
       { email, password },
       config
     )
@@ -119,7 +119,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.get(
-      `http://localhost:5000/api/user/${id}`,
+      `https://mysterious-thicket-15468.herokuapp.com/api/user/${id}`,
       config
     )
 
@@ -153,7 +153,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.put(
-      `http://localhost:5000/api/user/profile`,
+      `https://mysterious-thicket-15468.herokuapp.com/api/user/profile`,
       user,
       config
     )
@@ -200,7 +200,7 @@ export const listUsers = () => async (dispatch, getState) => {
     }
 
     const { data } = await axios.get(
-      `http://localhost:5000/api/user/register`,
+      `https://mysterious-thicket-15468.herokuapp.com/api/user/register`,
       config
     )
 
@@ -233,7 +233,10 @@ export const deleteUser = (id) => async (dispatch, getState) => {
       },
     }
 
-    await axios.delete(`http://localhost:5000/api/user/${id}`, config)
+    await axios.delete(
+      `https://mysterious-thicket-15468.herokuapp.com/api/user/${id}`,
+      config
+    )
 
     dispatch({
       type: USER_DELETE_SUCCESS,
@@ -264,7 +267,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.put(
-      `http://localhost:5000/api/user/${user._id}`,
+      `https://mysterious-thicket-15468.herokuapp.com/api/user/${user._id}`,
       user,
       config
     )

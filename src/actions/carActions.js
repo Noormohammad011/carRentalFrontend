@@ -23,7 +23,9 @@ export const listCars = () => async (dispatch) => {
   try {
     dispatch({ type: CAR_LIST_REQUEST })
 
-    const { data } = await axios.get(`http://localhost:5000/api/car/`)
+    const { data } = await axios.get(
+      `https://mysterious-thicket-15468.herokuapp.com/api/car/`
+    )
 
     dispatch({
       type: CAR_LIST_SUCCESS,
@@ -37,13 +39,13 @@ export const listCars = () => async (dispatch) => {
   }
 }
 
-
-
 export const listCarDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: CAR_DETAILS_REQUEST })
 
-    const { data } = await axios.get(`http://localhost:5000/api/car/${id}`)
+    const { data } = await axios.get(
+      `https://mysterious-thicket-15468.herokuapp.com/api/car/${id}`
+    )
 
     dispatch({
       type: CAR_DETAILS_SUCCESS,
@@ -56,8 +58,6 @@ export const listCarDetails = (id) => async (dispatch) => {
     })
   }
 }
-
-
 
 // export const editCar = (reqObj) => async (dispatch) => {
 //   dispatch({ type: 'LOADING', payload: true })
@@ -93,7 +93,10 @@ export const deleteCar = (id) => async (dispatch, getState) => {
       },
     }
 
-    await axios.delete(`http://localhost:5000/api/car/${id}`, config)
+    await axios.delete(
+      `https://mysterious-thicket-15468.herokuapp.com/api/car/${id}`,
+      config
+    )
 
     dispatch({
       type: CAR_DELETE_SUCCESS,
@@ -111,7 +114,6 @@ export const deleteCar = (id) => async (dispatch, getState) => {
     })
   }
 }
-
 
 export const updateCar = (product) => async (dispatch, getState) => {
   try {
@@ -131,7 +133,7 @@ export const updateCar = (product) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.put(
-      `http://localhost:5000/api/car/${product._id}`,
+      `https://mysterious-thicket-15468.herokuapp.com/api/car/${product._id}`,
       product,
       config
     )
@@ -169,7 +171,7 @@ export const updateCar = (product) => async (dispatch, getState) => {
 //          Authorization: `Bearer ${userInfo.token}`,
 //        },
 //      }
-//     await axios.post('http://localhost:5000/api/car/', reqObj)
+//     await axios.post('https://mysterious-thicket-15468.herokuapp.com/api/car/', reqObj)
 
 //     dispatch({ type: CAR_CREATE_SUCCESS, payload: data })
 //     message.success('New car added successfully')
@@ -199,7 +201,7 @@ export const createCar = (reqObj) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.post(
-      `http://localhost:5000/api/car/`,
+      `https://mysterious-thicket-15468.herokuapp.com/api/car/`,
       reqObj,
       config
     )
@@ -219,22 +221,25 @@ export const createCar = (reqObj) => async (dispatch, getState) => {
   }
 }
 
-
 export const addCar = (reqObj) => async (dispatch, getState) => {
   dispatch({ type: 'LOADING', payload: true })
 
   try {
-     const {
-       userLogin: { userInfo },
-     } = getState()
+    const {
+      userLogin: { userInfo },
+    } = getState()
 
-     const config = {
-       headers: {
-         'Content-Type': 'application/json',
-         Authorization: `Bearer ${userInfo.token}`,
-       },
-     }
-    await axios.post('http://localhost:5000/api/car/', reqObj, config)
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+    await axios.post(
+      'https://mysterious-thicket-15468.herokuapp.com/api/car/',
+      reqObj,
+      config
+    )
 
     dispatch({ type: 'LOADING', payload: false })
     message.success('New car added successfully')
