@@ -43,8 +43,6 @@ export const bookCar = (reqObj) => async (dispatch) => {
   }
 }
 
-
-
 export const getAllBookings = () => async (dispatch, getState) => {
   try {
     dispatch({ type: BOOKING_GET_REQUEST })
@@ -59,21 +57,22 @@ export const getAllBookings = () => async (dispatch, getState) => {
       },
     }
 
-   const { data } = await axios.get(
-     `https://mysterious-thicket-15468.herokuapp.com/api/bookings/bookcar`,
-     config
-   )
+    const { data } = await axios.get(
+      `https://mysterious-thicket-15468.herokuapp.com/api/bookings/bookcar`,
+      config
+    )
 
-   dispatch({
-     type: BOOKING_GET_SUCCESS,
-     payload: data,
-   })
-  
+    dispatch({
+      type: BOOKING_GET_SUCCESS,
+      payload: data,
+    })
   } catch (error) {
-   dispatch({
-     type: BOOKING_GET_FAIL,
-     payload: error.response.data || 'Something went wrong.',
-   })
-   
+    dispatch({
+      type: BOOKING_GET_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
   }
 }

@@ -62,7 +62,7 @@ const Profile = () => {
         <div className='col-md-3'>
           <h1>User Profile</h1>
           {message && <Message>{message}</Message>}
-          {error && <Message>{error.error}</Message>}
+          {error && <Message>{error}</Message>}
           {loading && <Loader />}
           {success && <Message variant='success'>Profile Updated</Message>}
           <form onSubmit={submitHandler}>

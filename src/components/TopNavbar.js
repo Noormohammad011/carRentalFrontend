@@ -32,9 +32,9 @@ const TopNavbar = () => {
           <ul className='navbar-nav ms-auto mb-2 mb-lg-0 text-center'>
             {userInfo ? (
               <>
-                <li class='nav-item dropdown'>
+                <li className='nav-item dropdown'>
                   <a
-                    class='nav-link dropdown-toggle'
+                    className='nav-link dropdown-toggle'
                     id='navbarDropdown'
                     role='button'
                     data-bs-toggle='dropdown'
@@ -42,7 +42,10 @@ const TopNavbar = () => {
                   >
                     {userInfo.name}
                   </a>
-                  <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                  <ul
+                    className='dropdown-menu'
+                    aria-labelledby='navbarDropdown'
+                  >
                     <li className='nav-item'>
                       <Link
                         to='/profile'
@@ -85,9 +88,9 @@ const TopNavbar = () => {
               </>
             )}
             {userInfo && userInfo.isAdmin && (
-              <li class='nav-item dropdown mx-2'>
+              <li className='nav-item dropdown mx-2'>
                 <a
-                  class='nav-link dropdown-toggle'
+                  className='nav-link dropdown-toggle'
                   id='navbarDropdown'
                   role='button'
                   data-bs-toggle='dropdown'
@@ -95,7 +98,7 @@ const TopNavbar = () => {
                 >
                   Admin
                 </a>
-                <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                <ul className='dropdown-menu' aria-labelledby='navbarDropdown'>
                   <li className='nav-item'>
                     <Link
                       to='/admin/userlist'

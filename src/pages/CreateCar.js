@@ -1,24 +1,50 @@
 import { Col, Row, Form, Input } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addCar } from '../actions/carActions'
-
+import { createCar } from '../actions/carActions'
+import { useNavigate } from 'react-router-dom'
+import { CAR_CREATE_RESET } from '../constants/carConstans'
 import Loader from '../components/Loader'
+import Message from '../components/Message'
+
+
 
 function CreateCar() {
   const dispatch = useDispatch()
-  const { loading } = useSelector((state) => state.alertsReducer)
+  const navigate = useNavigate()
+  
+
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+  const carCreate = useSelector((state) => state.carCreate)
+  const {
+    loading: loadingCreate,
+    error: errorCreate,
+    success: successCreate,
+    car: createdCar,
+  } = carCreate
+  useEffect(() => {
+    dispatch({ type: CAR_CREATE_RESET })
+
+    if (!userInfo || !userInfo.isAdmin) {
+      navigate('/login')
+    }
+
+    if (successCreate) {
+      navigate(`/admin/carlist`)
+    }
+  }, [dispatch, navigate, userInfo, successCreate])
 
   function onFinish(values) {
     values.bookedTimeSlots = []
 
-    dispatch(addCar(values))
-    console.log(values)
+    dispatch(createCar(values))
   }
 
   return (
     <>
-      {loading && <Loader />}
+      {loadingCreate && <Loader />}
+      {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
       <Row justify='center mt-5'>
         <Col lg={12} sm={24} xs={24} className='p-2'>
           <Form className='bs1 p-2' layout='vertical' onFinish={onFinish}>

@@ -41,6 +41,7 @@ const UserEdit = () => {
 
   const submitHandler = (e) => {
     e.preventDefault()
+
     dispatch(updateUser({ _id: id, name, email, isAdmin }))
   }
   return (
@@ -86,46 +87,22 @@ const UserEdit = () => {
                 id='inputEmail4'
               />
             </div>
-            <div class='form-check col-md-6 offset-md-3'>
+
+            <div className='form-check col-md-6 offset-md-3'>
               <input
-                class='form-check-input'
+                className='form-check-input'
                 type='checkbox'
                 id='defaultCheck1'
-                checked={isAdmin}
-                onChange={(e) => setIsAdmin(e.target.value)}
+                checked={!!isAdmin}
+                onChange={(e) => setIsAdmin(!!e.target.value)}
               />
-              <label class='form-check-label' htmlFor='defaultCheck1'>
+              <label className='form-check-label' htmlFor='defaultCheck1'>
                 Is Admin
               </label>
             </div>
-            {/* <div className='form-check col-md-6 offset-md-3'>
-              <input
-                class='form-check'
-                type='checkbox'
-                label='Is Admin'
-                checked={isAdmin}
-                onChange={(e) => setIsAdmin(e.target.value)}
-              />
-              <label class='form-check-label' for='flexCheckDefault'>
-                Is Admin
-              </label>
-            </div> */}
-
-            {/* <Form.Group controlId='isAdmin'>
-              <Form.Check
-                type='checkbox'
-                label='Is Admin'
-                checked={isAdmin}
-                onChange={(e) => setIsAdmin(e.target.value)}
-              ></Form.Check>
-            </Form.Group> */}
 
             <div className='col-md-6 offset-md-3'>
-              <button
-                disabled={!name || !email || !isAdmin}
-                type='submit'
-                className='btn btn-primary'
-              >
+              <button type='submit' className='btn btn-primary'>
                 Update
               </button>
             </div>

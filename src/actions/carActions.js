@@ -34,7 +34,10 @@ export const listCars = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: CAR_LIST_FAIL,
-      payload: error.response.data || 'Something went wrong.',
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     })
   }
 }
@@ -54,27 +57,13 @@ export const listCarDetails = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: CAR_DETAILS_FAIL,
-      payload: error.response.data || 'Something went wrong.',
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     })
   }
 }
-
-// export const editCar = (reqObj) => async (dispatch) => {
-//   dispatch({ type: 'LOADING', payload: true })
-
-//   try {
-//     await axios.post('/api/cars/editcar', reqObj)
-
-//     dispatch({ type: 'LOADING', payload: false })
-//     message.success('Car details updated successfully')
-//     setTimeout(() => {
-//       window.location.href = '/admin'
-//     }, 500)
-//   } catch (error) {
-//     console.log(error)
-//     dispatch({ type: 'LOADING', payload: false })
-//   }
-// }
 
 export const deleteCar = (id) => async (dispatch, getState) => {
   try {
@@ -153,36 +142,38 @@ export const updateCar = (product) => async (dispatch, getState) => {
   }
 }
 
-// export const addCar = (reqObj) => async (dispatch, getState) => {
-//   dispatch({ type: 'LOADING', payload: true })
+export const editCar = (car) => async (dispatch, getState) => {
+  dispatch({ type: 'LOADING', payload: true })
 
-//   try {
-//      dispatch({
-//        type: CAR_CREATE_REQUEST,
-//      })
-//      const {
-//        userLogin: { userInfo },
+  try {
+    const {
+      userLogin: { userInfo },
+    } = getState()
 
-//      } = getState()
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
 
-//      const config = {
-//        headers: {
-//          'Content-Type': 'application/json',
-//          Authorization: `Bearer ${userInfo.token}`,
-//        },
-//      }
-//     await axios.post('https://mysterious-thicket-15468.herokuapp.com/api/car/', reqObj)
+    await axios.put(
+      `https://mysterious-thicket-15468.herokuapp.com/api/car/${car._id}`,
+      car,
+      config
+    )
 
-//     dispatch({ type: CAR_CREATE_SUCCESS, payload: data })
-//     message.success('New car added successfully')
-//     setTimeout(() => {
-//       window.location.href = '/admin'
-//     }, 500)
-//   } catch (error) {
-//     console.log(error)
-//     dispatch({ type: 'LOADING', payload: false })
-//   }
-// }
+    dispatch({ type: 'LOADING', payload: false })
+    message.success('Car details updated successfully')
+    setTimeout(() => {
+      window.location.href = '/admin/carlist'
+    }, 500)
+  } catch (error) {
+    console.log(error)
+    dispatch({ type: 'LOADING', payload: false })
+  }
+}
+
 export const createCar = (reqObj) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -218,36 +209,5 @@ export const createCar = (reqObj) => async (dispatch, getState) => {
           ? error.response.data.message
           : error.message,
     })
-  }
-}
-
-export const addCar = (reqObj) => async (dispatch, getState) => {
-  dispatch({ type: 'LOADING', payload: true })
-
-  try {
-    const {
-      userLogin: { userInfo },
-    } = getState()
-
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    }
-    await axios.post(
-      'https://mysterious-thicket-15468.herokuapp.com/api/car/',
-      reqObj,
-      config
-    )
-
-    dispatch({ type: 'LOADING', payload: false })
-    message.success('New car added successfully')
-    setTimeout(() => {
-      window.location.href = '/admin'
-    }, 500)
-  } catch (error) {
-    console.log(error)
-    dispatch({ type: 'LOADING', payload: false })
   }
 }
