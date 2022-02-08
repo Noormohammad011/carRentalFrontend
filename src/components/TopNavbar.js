@@ -5,14 +5,16 @@ import { useDispatch, useSelector } from 'react-redux'
 
 const TopNavbar = () => {
   const dispatch = useDispatch()
+  
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const logoutHandler = (e) => {
     e.preventDefault()
     dispatch(logout())
   }
+ 
   return (
-    <nav className='navbar navbar-expand-lg navbar-light bg-light shadow-md'>
+    <nav className='navbar navbar-expand-lg navbar-dark bg-dark shadow-md'>
       <div className='container'>
         <Link to='/' className='navbar-brand'>
           <i className='fas fa-car fa-2x'></i>
@@ -29,6 +31,8 @@ const TopNavbar = () => {
           <span className='navbar-toggler-icon'></span>
         </button>
         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
+         
+
           <ul className='navbar-nav ms-auto mb-2 mb-lg-0 text-center'>
             {userInfo ? (
               <>

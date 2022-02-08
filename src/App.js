@@ -14,80 +14,85 @@ import CarLists from './pages/CarLists'
 import CarEdit from './pages/CarEdit'
 import BookingList from './pages/BookingList'
 import CreateCar from './pages/CreateCar'
+import Footer from './components/Footer'
 const App = () => {
   return (
     <BrowserRouter>
       <TopNavbar />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        <Route
-          path='/booking/:id'
-          element={
-            <PrivateRoute>
-              <Booking />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path='/profile'
-          element={
-            <PrivateRoute>
-              <Profile />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path='/admin/userlist'
-          element={
-            <PrivateRoute>
-              <UserList />
-            </PrivateRoute>
-          }
-        />
-        {/* <Route path='/admin/user/:id/edit' element={<UserEdit />} /> */}
-        <Route
-          path='/admin/user/:id/edit'
-          element={
-            <PrivateRoute>
-              <UserEdit />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path='/admin/carlist'
-          element={
-            <PrivateRoute>
-              <CarLists />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path='/admin/car/:id/edit'
-          element={
-            <PrivateRoute>
-              <CarEdit />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path='/admin/bokingList'
-          element={
-            <PrivateRoute>
-              <BookingList />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path='/admin/careatecar'
-          element={
-            <PrivateRoute>
-              <CreateCar />
-            </PrivateRoute>
-          }
-        />
-      </Routes>
+      <main>
+        <Routes>
+          <Route path='/' element={<Home />} />
+
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route
+            path='/booking/:id'
+            element={
+              <PrivateRoute>
+                <Booking />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path='/profile'
+            element={
+              <PrivateRoute>
+                <Profile />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path='/admin/userlist'
+            element={
+              <PrivateRoute>
+                <UserList />
+              </PrivateRoute>
+            }
+          />
+          {/* <Route path='/admin/user/:id/edit' element={<UserEdit />} /> */}
+          <Route
+            path='/admin/user/:id/edit'
+            element={
+              <PrivateRoute>
+                <UserEdit />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path='/admin/carlist'
+            element={
+              <PrivateRoute>
+                <CarLists />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path='/admin/car/:id/edit'
+            element={
+              <PrivateRoute>
+                <CarEdit />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path='/admin/bokingList'
+            element={
+              <PrivateRoute>
+                <BookingList />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path='/admin/careatecar'
+            element={
+              <PrivateRoute>
+                <CreateCar />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </main>
+      <Footer />
     </BrowserRouter>
   )
 }

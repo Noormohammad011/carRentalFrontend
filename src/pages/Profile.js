@@ -59,7 +59,7 @@ const Profile = () => {
   return (
     <div className='container'>
       <div className='row'>
-        <div className='col-md-3'>
+        <div className='col-md-3 col-12'>
           <h1>User Profile</h1>
           {message && <Message>{message}</Message>}
           {error && <Message>{error}</Message>}
@@ -126,10 +126,10 @@ const Profile = () => {
             </div>
           </form>
         </div>
-        <div className='col-md-9'>
+        <div className='col-md-9 col-12 '>
           <>
             <h1 className='text-center my-4 text-uppercase'>Booking</h1>
-            <div className='container-fluid'>
+            <div className='container-fluid mx-auto'>
               <table className='table-sm mx-auto table-responsive table-bordered'>
                 <thead>
                   <tr>
