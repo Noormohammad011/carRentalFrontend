@@ -114,7 +114,7 @@ const UserEdit = () => {
           <h1>Edit User</h1>
         </div>
         {message && <Message>{message}</Message>}
-        {error && <Message>{error.error}</Message>}
+        {error && <Message>{error}</Message>}
         {loading && <Loader />}
         <form className='row g-3' onSubmit={submitHandler}>
           <div className='col-md-6 offset-md-3'>

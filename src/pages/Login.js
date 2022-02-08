@@ -35,7 +35,7 @@ const Login = () => {
         <div className='col text-center'>
           <h1>Login</h1>
         </div>
-        {error && <Message>{error.error}</Message>}
+        {error && <Message>{error}</Message>}
         {loading && <Loader />}
         <form className='row g-3' onSubmit={handleSubmit}>
           <div className='col-md-6 offset-md-3'>

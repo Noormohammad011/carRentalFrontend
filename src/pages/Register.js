@@ -41,7 +41,7 @@ const Register = () => {
           <h1>Registration</h1>
         </div>
         {message && <Message>{message}</Message>}
-        {error && <Message>{error.error}</Message>}
+        {error && <Message>{error}</Message>}
         {loading && <Loader />}
         <form className='row g-3' onSubmit={handleSubmit}>
           <div className='col-md-6 offset-md-3'>
