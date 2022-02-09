@@ -1,6 +1,6 @@
 import React, {  useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllBookings } from '../actions/bookingActions'
+import { deleteBooking, getAllBookings } from '../actions/bookingActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import moment from 'moment'
@@ -13,6 +13,11 @@ const BookingList = () => {
   useEffect(() => {
     dispatch(getAllBookings())
   }, [])
+   const deleteHandler = (id) => {
+     if (window.confirm('Are you sure')) {
+       dispatch(deleteBooking(id))
+     }
+   }
   return (
     <>
       <h1 className='text-center my-4 text-uppercase'>Booking</h1>
@@ -28,8 +33,8 @@ const BookingList = () => {
                 <th>ID</th>
                 <th>CAR_NAME</th>
                 <th>CAR_RENT_HOUR</th>
-               
-                <th>TOTAL_TRANSACTION_ID</th>
+
+                <th>TOTAL_AMOUNT</th>
                 <th>FROM_BOOKING</th>
                 <th>TO_BOOKING</th>
                 <th>BOOKING_CREATED</th>
@@ -38,49 +43,18 @@ const BookingList = () => {
               </tr>
             </thead>
             <tbody>
-              {bookings
-                .map((booking) => (
+              {bookings &&
+                bookings.map((booking) => (
                   <tr key={booking._id}>
                     <td>{booking._id}</td>
                     <td>{booking.car.name}</td>
                     <td>{booking.car.rentPerHour}</td>
-                    <td>{booking.transactionId}</td>
+                    <td>{booking.totalAmount}</td>
                     <td>{booking.bookedTimeSlots.from}</td>
                     <td>{booking.bookedTimeSlots.to}</td>
                     <td>{moment(booking.createdAt).format('MMM DD yyyy')}</td>
                     <td>
-                      <>
-                        <button type='button' className='btn btn-sm btn-light'>
-                          <i className='fas fa-edit'></i>
-                        </button>
-                      </>
-                      <button
-                        type='button'
-                        className='btn btn-sm btn-danger'
-                        // onClick={() => deleteHandler(user._id)}
-                      >
-                        <i className='fas fa-trash'></i>
-                      </button>
-                    </td>
-                    {/* <td>{user.name}</td>
-                    <td>
-                      <a href={`mailto:${user.email}`}>{user.email}</a>
-                    </td>
-                    <td>
-                      {user.isAdmin ? (
-                        <i
-                          className='fas fa-check'
-                          style={{ color: 'green' }}
-                        ></i>
-                      ) : (
-                        <i
-                          className='fas fa-times'
-                          style={{ color: 'red' }}
-                        ></i>
-                      )}
-                    </td>
-                    <td>
-                      <Link to={`/admin/user/${user._id}/edit`}>
+                      <Link to={`/admin/booking/${booking._id}/edit`}>
                         <button type='button' className='btn btn-sm btn-light'>
                           <i className='fas fa-edit'></i>
                         </button>
@@ -88,11 +62,11 @@ const BookingList = () => {
                       <button
                         type='button'
                         className='btn btn-sm btn-danger'
-                        onClick={() => deleteHandler(user._id)}
+                        onClick={() => deleteHandler(booking._id)}
                       >
                         <i className='fas fa-trash'></i>
                       </button>
-                    </td> */}
+                    </td>
                   </tr>
                 ))}
             </tbody>

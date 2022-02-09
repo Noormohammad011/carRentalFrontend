@@ -139,24 +139,27 @@ const Profile = () => {
                     <th>FROM_BOOKING</th>
                     <th>TO_BOOKING</th>
                     <th>BOOKING_CREATED</th>
+                    <th>DELIVERED</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {bookings
-                    .filter((o) => o.user == userInfo._id)
-                    .map((booking) => (
-                      <tr key={booking._id}>
-                        <td>{booking._id}</td>
-                        <td>{booking.car.name}</td>
-                        <td>{booking.car.rentPerHour}</td>
+                  {bookings &&
+                    bookings
+                      .filter((o) => o.user == userInfo._id)
+                      .map((booking, index) => (
+                        <tr key={booking._id}>
+                          <td>{index + 1}</td>
+                          <td>{booking.car.name}</td>
+                          <td>{booking.car.rentPerHour}</td>
 
-                        <td>{booking.bookedTimeSlots.from}</td>
-                        <td>{booking.bookedTimeSlots.to}</td>
-                        <td>
-                          {moment(booking.createdAt).format('MMM DD yyyy')}
-                        </td>
-                      </tr>
-                    ))}
+                          <td>{booking.bookedTimeSlots.from}</td>
+                          <td>{booking.bookedTimeSlots.to}</td>
+                          <td>
+                            {moment(booking.createdAt).format('MMM DD yyyy')}
+                          </td>
+                          <td>{booking.isDelivered ? 'YES' : 'NO'}</td>
+                        </tr>
+                      ))}
                 </tbody>
               </table>
             </div>

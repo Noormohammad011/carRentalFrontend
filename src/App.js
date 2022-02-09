@@ -14,7 +14,10 @@ import CarLists from './pages/CarLists'
 import CarEdit from './pages/CarEdit'
 import BookingList from './pages/BookingList'
 import CreateCar from './pages/CreateCar'
+import NotFoundPage from './pages/NotFoundPage'
 import Footer from './components/Footer'
+import ContactUs from './pages/ContactUs'
+import BookingEdit from './pages/BookingEdit'
 const App = () => {
   return (
     <BrowserRouter>
@@ -30,6 +33,14 @@ const App = () => {
             element={
               <PrivateRoute>
                 <Booking />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path='/admin/booking/:id/edit'
+            element={
+              <PrivateRoute>
+                <BookingEdit />
               </PrivateRoute>
             }
           />
@@ -90,6 +101,8 @@ const App = () => {
               </PrivateRoute>
             }
           />
+          <Route path='/contact' element={<ContactUs />} />
+          <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </main>
       <Footer />

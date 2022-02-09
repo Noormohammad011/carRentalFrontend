@@ -20,11 +20,7 @@ const CarLists = () => {
         navigate('/login')
       }
       dispatch(listCars())
-      // if (successCreate) {
-      //   history.push(`/admin/product/${createdProduct._id}/edit`)
-      // } else {
-      //   dispatch(listProducts('', pageNumber))
-      // }
+     
     }, [
       dispatch,
       navigate,
