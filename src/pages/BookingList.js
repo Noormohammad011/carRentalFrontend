@@ -44,7 +44,7 @@ const BookingList = () => {
             </thead>
             <tbody>
               {bookings &&
-                bookings.map((booking) => (
+                bookings?.map((booking) => (
                   <tr key={booking._id}>
                     <td>{booking._id}</td>
                     <td>{booking.car.name}</td>

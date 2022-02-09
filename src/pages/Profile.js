@@ -145,8 +145,8 @@ const Profile = () => {
                 <tbody>
                   {bookings &&
                     bookings
-                      .filter((o) => o.user == userInfo._id)
-                      .map((booking, index) => (
+                      ?.filter((o) => o.user == userInfo._id)
+                      ?.map((booking, index) => (
                         <tr key={booking._id}>
                           <td>{index + 1}</td>
                           <td>{booking.car.name}</td>
